@@ -1,0 +1,56 @@
+/home/ubuntu/thai_kyat_exchange_bot/bot.py:276: PTBUserWarning: If 'per_message=False', 'CallbackQueryHandler' will not be tracked for every message. Read this FAQ entry to learn more about the per_* settings: https://github.com/python-telegram-bot/python-telegram-bot/wiki/Frequently-Asked-Questions#what-do-the-per_-settings-in-conversationhandler-do.
+  application.add_handler(ConversationHandler(
+/home/ubuntu/thai_kyat_exchange_bot/bot.py:283: PTBUserWarning: If 'per_message=False', 'CallbackQueryHandler' will not be tracked for every message. Read this FAQ entry to learn more about the per_* settings: https://github.com/python-telegram-bot/python-telegram-bot/wiki/Frequently-Asked-Questions#what-do-the-per_-settings-in-conversationhandler-do.
+  application.add_handler(ConversationHandler(
+/home/ubuntu/thai_kyat_exchange_bot/bot.py:295: PTBUserWarning: If 'per_message=False', 'CallbackQueryHandler' will not be tracked for every message. Read this FAQ entry to learn more about the per_* settings: https://github.com/python-telegram-bot/python-telegram-bot/wiki/Frequently-Asked-Questions#what-do-the-per_-settings-in-conversationhandler-do.
+  application.add_handler(ConversationHandler(
+/home/ubuntu/thai_kyat_exchange_bot/bot.py:307: PTBUserWarning: If 'per_message=False', 'CallbackQueryHandler' will not be tracked for every message. Read this FAQ entry to learn more about the per_* settings: https://github.com/python-telegram-bot/python-telegram-bot/wiki/Frequently-Asked-Questions#what-do-the-per_-settings-in-conversationhandler-do.
+  application.add_handler(ConversationHandler(
+2026-03-23 11:36:41,470 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getMe "HTTP/1.1 200 OK"
+2026-03-23 11:36:41,941 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-23 11:36:41,942 - telegram.ext.Application - INFO - Application started
+2026-03-23 11:36:54,117 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:36:55,512 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:36:55,514 - telegram.ext.Application - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/telegram/ext/_application.py", line 1264, in process_update
+    await coroutine
+  File "/usr/local/lib/python3.11/dist-packages/telegram/ext/_handlers/basehandler.py", line 157, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/thai_kyat_exchange_bot/bot.py", line 50, in start
+    [InlineKeyboardButton("📊 ငွေလဲနှုန်းကြည့်ရန်", callback_query_data="view_rates")],
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: InlineKeyboardButton.__init__() got an unexpected keyword argument 'callback_query_data'
+2026-03-23 11:37:05,971 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:37:16,673 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:37:27,368 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:37:38,064 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:37:48,774 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:37:59,485 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:38:10,190 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:38:20,652 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:38:31,113 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:38:41,814 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:38:52,547 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:39:03,241 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:39:13,934 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:39:24,391 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:39:35,093 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:39:45,787 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:39:56,483 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:40:07,200 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:40:17,900 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:40:28,611 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:40:39,098 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:40:49,557 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:41:00,258 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:41:10,723 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:41:21,179 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:41:31,892 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:41:42,594 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:41:53,304 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:42:03,761 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:42:14,219 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 200 OK"
+2026-03-23 11:42:14,675 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8630266611:AAHc_iB8hhBMCil4AT2yTmDOZhSbYCL34qw/getUpdates "HTTP/1.1 401 Unauthorized"
+2026-03-23 11:42:14,675 - telegram.ext.Updater - ERROR - Invalid token; aborting

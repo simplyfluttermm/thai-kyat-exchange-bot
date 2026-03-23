@@ -10,6 +10,8 @@ from telegram.ext import (
     ContextTypes,
     filters,
 )
+from flask import Flask
+import threading
 from database import (
     init_db, get_rates, update_rates, get_bank_accounts, 
     add_bank_account, clear_bank_accounts, create_transaction, 
@@ -55,7 +57,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         keyboard.append([InlineKeyboardButton("⚙️ Admin Panel", callback_query_data="admin_panel")])
         
     reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text(MSG_START, reply_markup=reply_markup)
+    if update.message:
+        await update.message.reply_text(MSG_START, reply_markup=reply_markup)
+    elif update.callback_query:
+        await update.callback_query.message.edit_text(MSG_START, reply_markup=reply_markup)
 
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
@@ -65,20 +70,14 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if query.data == "view_rates":
         b2k, k2b = get_rates()
         if b2k == 0:
-            await query.edit_message_text(MSG_NO_RATES)
+            text = MSG_NO_RATES
         else:
-            await query.edit_message_text(MSG_RATES.format(baht_to_kyat=b2k, kyat_to_baht=k2b, time="ယနေ့"))
+            text = MSG_RATES.format(baht_to_kyat=b2k, kyat_to_baht=k2b, time="ယနေ့")
         keyboard = [[InlineKeyboardButton("⬅️ နောက်သို့", callback_query_data="back_to_main")]]
-        await query.edit_message_reply_markup(InlineKeyboardMarkup(keyboard))
+        await query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
 
     elif query.data == "back_to_main":
-        keyboard = [
-            [InlineKeyboardButton("📊 ငွေလဲနှုန်းကြည့်ရန်", callback_query_data="view_rates")],
-            [InlineKeyboardButton("🔄 ငွေလဲလှယ်ရန်", callback_query_data="exchange")],
-        ]
-        if is_admin(user_id):
-            keyboard.append([InlineKeyboardButton("⚙️ Admin Panel", callback_query_data="admin_panel")])
-        await query.edit_message_text(MSG_START, reply_markup=InlineKeyboardMarkup(keyboard))
+        await start(update, context)
 
     elif query.data == "admin_panel":
         if not is_admin(user_id):
@@ -271,15 +270,31 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("လုပ်ဆောင်ချက်ကို ပယ်ဖျက်လိုက်ပါပြီ။", reply_markup=ReplyKeyboardRemove())
     return ConversationHandler.END
 
+# Simple Flask server to keep Render happy
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return "Bot is running!"
+
+def run_flask():
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
+
 def main():
     init_db()
+    
+    # Start Flask in a separate thread
+    threading.Thread(target=run_flask, daemon=True).start()
+    
     application = Application.builder().token(BOT_TOKEN).build()
 
     # Admin Settings
     application.add_handler(ConversationHandler(
         entry_points=[CallbackQueryHandler(set_rates_start, pattern="^set_rates$")],
         states={SET_RATES: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_rates_save)]},
-        fallbacks=[CommandHandler("cancel", cancel)]
+        fallbacks=[CommandHandler("cancel", cancel)],
+        per_message=False
     ))
     
     application.add_handler(ConversationHandler(
@@ -289,7 +304,8 @@ def main():
             ADD_BANK_ACC: [MessageHandler(filters.TEXT & ~filters.COMMAND, add_bank_acc)],
             ADD_BANK_OWNER: [MessageHandler(filters.TEXT & ~filters.COMMAND, add_bank_owner)],
         },
-        fallbacks=[CommandHandler("cancel", cancel)]
+        fallbacks=[CommandHandler("cancel", cancel)],
+        per_message=False
     ))
 
     # User Exchange Flow
@@ -300,14 +316,16 @@ def main():
             EXCHANGE_PAYMENT_INFO: [MessageHandler(filters.TEXT & ~filters.COMMAND, exchange_payment_info)],
             EXCHANGE_PROOF: [MessageHandler(filters.PHOTO, exchange_proof)],
         },
-        fallbacks=[CommandHandler("cancel", cancel)]
+        fallbacks=[CommandHandler("cancel", cancel)],
+        per_message=False
     ))
     
     # Admin Approval Flow
     application.add_handler(ConversationHandler(
         entry_points=[CallbackQueryHandler(admin_tx_handler, pattern="^(approve|reject)_")],
         states={ADMIN_APPROVE_PROOF: [MessageHandler(filters.PHOTO, admin_approve_proof)]},
-        fallbacks=[CommandHandler("cancel", cancel)]
+        fallbacks=[CommandHandler("cancel", cancel)],
+        per_message=False
     ))
 
     application.add_handler(CommandHandler("start", start))
