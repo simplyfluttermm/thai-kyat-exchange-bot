@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: thai-exchange-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_ID
+        sync: false
+      - key: PORT
+        value: 10000
